@@ -47,7 +47,7 @@ class HomeController extends Controller {
             _id: -1,
           }).skip(Number(q.skip))
           .limit(Math.min(q.limit, 100));
-        ctx.logger.info(ret);
+        ctx.logger.info(ret[0]);
         const vv = ret.map(s => {
           return {
             id: s.id,
