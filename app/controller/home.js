@@ -28,13 +28,13 @@ class HomeController extends Controller {
     const aggregate2 = ctx.request.headers['X-Aggregate-Str'];
     const questr = query || query2;
     const aggstr = aggregate || aggregate2;
-
+    ctx.logger.info(ctx.request.body);
     try {
       const qstr = questr || aggstr;
       const buff = Buffer.from(qstr || '{}', 'base64');
       const q = JSON.parse(buff.toString() || '{}');
       const model = await this.getModel();
-      ctx.logger.info(model);
+
       if (!model) {
         ctx.status = 400;
         return;
@@ -47,7 +47,7 @@ class HomeController extends Controller {
             _id: -1,
           }).skip(Number(q.skip))
           .limit(Math.min(q.limit, 100));
-        ctx.logger.info(ret[0]);
+
         const vv = ret.map(s => {
           return {
             id: s.id,
