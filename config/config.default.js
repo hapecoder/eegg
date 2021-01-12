@@ -20,8 +20,12 @@ module.exports = appInfo => {
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1606288321606_1517';
 
+
+  // 不需要验证token的路由
+  // config.routerAuth = [  ];
+
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = ['auth']; // 中间件执行顺序则是按照数组中的顺序执行
   config.static = {
     prefix: '/',
     dir: [path.join(appInfo.baseDir, 'web/dist/spa'), {
@@ -32,6 +36,9 @@ module.exports = appInfo => {
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
+  };
+  config.jwt = {
+    secret: '123456',
   };
   config.cors = {
     origin: '*',

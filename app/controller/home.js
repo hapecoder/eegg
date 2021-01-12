@@ -28,10 +28,12 @@ class HomeController extends Controller {
     const aggregate2 = ctx.request.headers['X-Aggregate-Str'];
     const questr = query || query2;
     const aggstr = aggregate || aggregate2;
-    ctx.logger.info(ctx.request.body);
+    // ctx.logger.info(ctx.request.path);
     try {
       const qstr = questr || aggstr;
+
       const buff = Buffer.from(qstr || '{}', 'base64');
+      ctx.logger.info(buff.toString());
       const q = JSON.parse(buff.toString() || '{}');
       const model = await this.getModel();
 
